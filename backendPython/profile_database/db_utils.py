@@ -15,6 +15,7 @@ from llms import embedder
 
 path = 'backendPython/neo4j\Placement data.xlsx'
 df = pd.read_excel(path, sheet_name='2020-21')
+
 values = {'Selected': df.iloc[:,2].mode() , 'CTC':df.iloc[:, 4].median() , 'CGPA':0}
 df.fillna(value=values, inplace=True)
 df = df.iloc[5:25, :]
@@ -104,6 +105,12 @@ def web_scraping(url):
 
 vector_db = Chroma(embedding_function = embedder, persist_directory= 'backendPython/profile_database/info_db')
 docs = []
+
+page_prompt = '''
+
+The company is looking for {JobProfile}. The number of students that got selected for this profile are {Selected} and the average CTC is {CTC} LPA. The CGPA cutoff is {CGPA}.
+You can find more about the company in its metadata. The company is looking for the following skills : {Skills}
+'''
 skill_set = set()
 import time
 syntax_err_ct = 0

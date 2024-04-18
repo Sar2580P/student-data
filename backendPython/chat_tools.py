@@ -36,4 +36,17 @@ task_tools = [
     return_direct = True, 
     handle_tool_error=True,
     ),
+    # Tool(
+    #     name = 'LLM' , 
+    #     description = '''
+    #             This tool can handle variety of tasks like :
+    #             1) summarizing the text
+    #             2) sorting a list of objects/ numbers in a particular order.
+    #             3) formatting the text in a particular way.
+    #     ''' ,
+    #     return_direct = True,
+    #     handle_tool_error=True,
+    #     func = LLMChain(llm=llm, prompt=prompt).run,
+    # ) ,
+    
 ]

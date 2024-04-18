@@ -14,7 +14,7 @@ retriever = db.as_retriever(search_kwargs={"k": 5}, return_source_documents=True
 print(retriever.get_relevant_documents('job_profile :  Software Engineer '))
 compression_retriever = ContextualCompressionRetriever(base_compressor=_filter, base_retriever=retriever)
 
-
+#__________________________________________________________________________________________________
 
 def get_profiles(query: str, skill_query =  ['Python', 'SQL', 'R']):
     results:List[Document] = compression_retriever.get_relevant_documents(query)
@@ -35,8 +35,7 @@ def get_profiles(query: str, skill_query =  ['Python', 'SQL', 'R']):
                 j+=1
             k+=1
         if x:
-            companies_info[order] = doc.metadata
-            order+=1
+            companies_info.append(doc.metadata)
     for i in general_suggestions_idxs:
         companies_info[order] = results[i].metadata
         order+=1
