@@ -44,7 +44,8 @@ sets = {
 }
 edge_description = json.load(open('backendPython/neo4j/edges.json', 'r'))
 
-for index, row in df.iterrows():
+import tqdm 
+for index, row in tqdm.tqdm(df.iterrows()):
   # creating nodes
   list_ = []
   for i, val in enumerate(row):
@@ -98,7 +99,7 @@ for index, row in df.iterrows():
 
 
   # defining relations
-  for i in range(6):
+  for i in tqdm.tqdm(range(6)):
     for j in range(6):
       if list_[i].type == list_[j].type: 
         continue

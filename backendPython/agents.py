@@ -31,12 +31,11 @@ class PersonalAgent:
         self.agent = ZeroShotAgent(llm_chain=self.llm_chain, tools=task_tools, verbose=True)
         self.agent_chain = AgentExecutor.from_agent_and_tools(
             agent=self.agent, tools=task_tools, 
-            verbose=True, memory=self.memory, handle_parsing_errors=True,
+            verbose=True, memory=self.memory, handle_parsing_errors=True
         )
 
     def run(self, query):
         try:
-            print('**')
             ans =  self.agent_chain.run(query)
             return ans
         except Exception as e:
@@ -53,5 +52,5 @@ class PersonalAgent:
 
 agent_chain = PersonalAgent()
 
-x = agent_chain.run("name companies which offered work location as Kolkata")
+x = agent_chain.run("name 3 companies which offered ctc above 20")
 print('\n\n\n\n', x)

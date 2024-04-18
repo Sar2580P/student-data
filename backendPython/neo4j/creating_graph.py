@@ -5,7 +5,7 @@ sys.path.append('backendPython')
 from llms import *
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv()) # read local .env file
-from langchain.chains import GraphCypherQAChain
+from langchain.chains.graph_qa.cypher import GraphCypherQAChain
 
 graph = neo4j_graph.Neo4jGraph(
   url = os.environ['NEO4J_URI'],
@@ -13,7 +13,7 @@ graph = neo4j_graph.Neo4jGraph(
   password=os.environ['NEO4J_PASSWORD']
 )
 graph_chain = GraphCypherQAChain.from_llm(
-   llm = llm, graph=graph, verbose=True, return_direct=False,validate_cypher=True,
+   llm = llm, graph=graph, verbose=True, return_direct=True,validate_cypher=True,
 )
 # input = {'query': }
 # x = graph_chain.run('name companies which offered work location as Kolkata')
